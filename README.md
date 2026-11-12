@@ -1,14 +1,10 @@
-# Pohja Ohjelmointi 1 -kurssin harjoitustöiden Git-varastoille.
+# Sokkelon salaisuus
 
-Tämä on pohja Ohjelmointi 1 -kurssin harjoitustöiden Git-varastoille. 
-Opiskelija *forkkaa* tämän repon omaa harjoitustyötään varten. 
-`fork`-toiminto löytyy sivun yläreunasta.
+Ohjelmointi 1 -kurssin harjoitustyö.
 
-Muokkaa oman projektisi asetuksia, kuten projektin nimeä
-ja projektin kuvausta kohdasta Settings. 
+Tekijä: Jegor Zadorozhnyi
 
-Sekä suunnitelman että pelin muokkaamisen tulee tapahtua Git-työkaluja käyttäen. 
-Tiedostojen lisääminen tai muokkaaminen Github/Gitlab-palvelun kautta (selaimessa) **on
-ehdottomasti kielletty**. 
+Peli on ylhäältä kuvattu sokkelo, jossa kerätään avaimia ja paetaan varjoa.
+Peli on tehty Jypelillä ja toimii Windowsilla. Pelaajia on yksi.
 
-Lue Git-versiohallinnan tarkemmat käyttöohjeet TIMistä: <https://tim.jyu.fi/view/kurssit/tie/ohj1/harjoitustyo/git>
+Suunnitelma: [suunnitelma/suunnitelma.md](suunnitelma/suunnitelma.md)
