@@ -14,103 +14,72 @@ Pelaajien lukumäärä: 1
 
 ## Pelin tarina
 
-Olet nuori tutkimusmatkailija, joka löytää metsän keskeltä ikivanhan kivisokkelon.
-Sokkelon sisällä on kolme maagista avainta, jotka avaavat tien ulos. Sokkeloa
-vartioi kuitenkin liikkuva varjo, joka ei päästä tunkeilijoita helpolla.
-
-Tehtäväsi on kerätä kaikki kolme avainta, avata uloskäynti ja paeta sokkelosta
-ennen kuin aika loppuu. Jokainen osuma varjoon vie yhden elämän.
+Olet tutkimusmatkailija, joka löytää metsästä vanhan kivisokkelon.
+Sokkelon sisällä on kolme avainta ja liikkuva varjo.
+Kun keräät kaikki avaimet, voit avata uloskäynnin ja paeta.
 
 ## Pelin idea ja tavoitteet
 
-Peli on ylhäältä kuvattu ruudukkosokkelo, jossa pelaaja liikkuu ruudulta toiselle
+Peli on ylhäältä kuvattu sokkelo. Pelaaja liikkuu ruudusta toiseen
 nuolinäppäimillä tai WASD-näppäimillä.
 
 Pelin tavoitteet:
 
-- kerää kolme avainta sokkelon eri osista
-- väistä liikkuvaa vihollista
-- löydä avautunut uloskäynti ja poistu sokkelosta
-- kerää mahdollisimman paljon pisteitä jäljelle jääneellä ajalla
+- kerää kolme avainta
+- väistä varjoa
+- avaa uloskäynti
+- kerää pisteitä jäljellä olevalla ajalla
 
-Peli päättyy voittoon, kun pelaaja on kerännyt kaikki avaimet ja päässyt ulos.
+Peli päättyy voittoon, kun kaikki avaimet on kerätty ja pelaaja pääsee ulos.
 Peli päättyy häviöön, jos elämät tai aika loppuvat.
 
 ## Hahmotelma pelistä
 
-![Hahmotelma sokkelosta](hahmotelma.png "Sokkelon salaisuus -hahmotelma")
+![Hahmotelma](hahmotelma.png)
 
 ## Pelin eteneminen
 
-1. Peli käynnistyy aloitusruudusta, jossa näkyvät ohjeet ja pelin tavoite.
-2. Pelaaja liikkuu sokkelossa ja etsii kolme avainta.
-3. Vihollinen liikkuu ennalta määritettyä reittiä pitkin ja yrittää osua pelaajaan.
-4. Avainten keräämisen jälkeen uloskäynti avautuu ja muuttuu vihreäksi.
-5. Pelaaja siirtyy uloskäynnille, jolloin taso päättyy ja pistelaskuri näyttää tuloksen.
-6. Seuraava taso on hieman suurempi ja vihollinen liikkuu nopeammin.
-7. Kolmannen tason jälkeen peli päättyy voittoruutuun.
+1. Peli alkaa ensimmäisestä tasosta.
+2. Pelaaja etsii kolme avainta.
+3. Varjo liikkuu sokkelossa ja yrittää osua pelaajaan.
+4. Kun kaikki avaimet on kerätty, uloskäynti avautuu.
+5. Pelaaja menee uloskäynnille, ja taso päättyy.
+6. Seuraava taso on isompi ja varjo liikkuu nopeammin.
+7. Kolmannen tason jälkeen peli päättyy.
 
-## Pelin oliot ja niiden toiminnot
+## Pelin oliot
 
-| Olio | Toiminto | Suhde muihin olioihin |
-|------|----------|------------------------|
-| Pelaaja | Liikkuu ruudukossa, kerää avaimet, väistää vihollista | Kerää avaimet, törmää seinin ja viholliseen, poistuu uloskäynnistä |
-| Seinä | Estää liikkumisen | Ympäröi käytävät ja rajaa pelialueen |
-| Avain | Kerättävä esine | Pelaaja kerää avaimet, jotka avaavat uloskäynnin |
-| Vihollinen | Liikkuu reittiä pitkin | Osuessaan pelaajaan vie yhden elämän |
-| Uloskäynti | Tason lopetus | Avautuu, kun kaikki avaimet on kerätty |
-| Ajastin | Mittaa jäljellä olevaa aikaa | Ajan loppuessa peli päättyy |
-| Pistelaskuri | Laskee pisteet avaimista ja ajasta | Näytetään tason lopussa |
+| Olio | Toiminto | Suhde muihin |
+|------|----------|--------------|
+| Pelaaja | Liikkuu ja kerää avaimet | Kerää avaimet ja menee ulos |
+| Seinä | Estää liikkumisen | Rajaa käytävät |
+| Avain | Kerättävä esine | Avaimet avaavat uloskäynnin |
+| Varjo | Liikkuu kohti pelaajaa | Vie pelaajalta elämän |
+| Uloskäynti | Lopettaa tason | Aukeaa, kun avaimet on kerätty |
+| Ajastin | Mittaa aikaa | Ajan loppuessa peli päättyy |
+| Pistelaskuri | Laskee pisteet | Näytetään tason lopussa |
 
 ## Toteutuksen suunnitelma
 
-### Tekninen rakenne
+Viikko 1:
 
-- `Sokkelo`-luokka perii Jypelin `Game`-luokan.
-- Kenttä tallennetaan kaksiulotteisena taulukkona `char[,]`, jossa eri merkit
-  kuvaavat seiniä, käytäviä, avaimia, vihollista ja uloskäyntiä.
-- Koko kenttä piirretään silmukalla taulukon läpi.
-- Avaimet tallennetaan listaan `List<GameObject>`, jotta niiden määrää ja
-  sijaintia on helppo käsitellä.
-- Funktio `OnkoSeina(int x, int y)` tarkistaa taulukosta, voiko pelaaja siirtyä
-  kyseiseen ruutuun, ja palauttaa `bool`-arvon.
-- Funktio `LaskePisteet(int avaintenMaara, double jäljelläOlevaAika)` laskee
-  tason pisteet ja palauttaa kokonaisluvun.
-- Aliohjelmat `LuoKentta`, `LiikutaPelaajaa`, `TarkistaTormaykset`,
-  `AloitaTaso` ja `LopetaPeli` jakavat pelin logiikan selkeisiin osiin.
-- Vakioilla (`const`) määritetään esimerkiksi ruudun koko, avainten määrä,
-  elämien määrä ja tason aika.
+- tutustun Jypeliin ja teen projektin rungon
+- piirrän kartan taulukosta
 
-### Aikataulu
+Viikko 2:
 
-Viikko 1
+- teen pelaajan liikkumisen
+- lisään seinät ja törmäystarkistuksen
+- lisään avaimet ja uloskäynnin
 
-- Git-varasto, solution ja projektin runko
-- suunnitelman viimeistely ja esittely ohjaajalle
-- kentän piirtäminen taulukosta silmukalla
+Viikko 3:
 
-Viikko 2
+- lisään varjon liikkumisen
+- lisään elämät, ajastimen ja pisteet
+- teen toisen ja kolmannen tason
 
-- pelaajan liikkuminen ja seinien törmäystarkistus
-- avainten kerääminen ja uloskäynnin avautuminen
-- funktio `OnkoSeina`
+Viikko 4:
 
-Viikko 3
-
-- vihollisen liikkuminen ja törmäystarkistus
-- elämät, ajastin ja pistelaskuri
-- funktio `LaskePisteet`
-- toinen ja kolmas taso
-
-Viikko 4
-
-- voitto- ja häviöruudut
-- ulkoasun viimeistely, äänet ja dokumentointi
-- koodin läpikäynti tyylioppaan mukaan
-- loppupalautus ja etävaraston toimivuuden testaus
-
-Jos aikaa jää
-
-- animaatiot pelaajalle ja viholliselle
-- satunnaisesti muuttuvat sokkelot
-- ennätyslista
+- teen voitto- ja häviöruudut
+- viimeistelen ulkoasun
+- testaan pelin ja tarkistan koodin
