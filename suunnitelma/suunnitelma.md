@@ -35,7 +35,7 @@ Peli päättyy häviöön, jos elämät tai aika loppuvat.
 
 ## Hahmotelma pelistä
 
-![Hahmotelma](hahmotelma.png)
+![Hahmotelma](sokkelon-hahmotelma.png)
 
 ## Pelin eteneminen
 
